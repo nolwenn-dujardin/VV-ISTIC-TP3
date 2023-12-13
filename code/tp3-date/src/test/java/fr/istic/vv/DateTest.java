@@ -5,6 +5,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DateTest {
+    @Test
+    void invalidDate() {
+        assertThrows(IllegalArgumentException.class, () -> new Date(45,1,54));
+    }
+
     /* isLeapYear */
 
     @Test
@@ -87,10 +92,32 @@ class DateTest {
     }
 
     @Test
-    void nextDate() {
+    void nextDate_basic() {
         Date date = new Date(24,12,2023);
         Date nextDate = date.nextDate();
         Date expectedNextDate = new Date(25,12,2023);
+
+        assertEquals(expectedNextDate.day, nextDate.day);
+        assertEquals(expectedNextDate.month, nextDate.month);
+        assertEquals(expectedNextDate.year, nextDate.year);
+    }
+
+    @Test
+    void nextDate_febLeap(){
+        Date date = new Date(28,2,2024);
+        Date nextDate = date.nextDate();
+        Date expectedNextDate = new Date(29,2,2024);
+
+        assertEquals(expectedNextDate.day, nextDate.day);
+        assertEquals(expectedNextDate.month, nextDate.month);
+        assertEquals(expectedNextDate.year, nextDate.year);
+    }
+
+    @Test
+    void nextDate_febCommon(){
+        Date date = new Date(28,2,2023);
+        Date nextDate = date.nextDate();
+        Date expectedNextDate = new Date(1,3,2023);
 
         assertEquals(expectedNextDate.day, nextDate.day);
         assertEquals(expectedNextDate.month, nextDate.month);
@@ -101,8 +128,8 @@ class DateTest {
 
     @Test
     void previousDate_FirstDayOfMonth(){
-        Date expectedPreviousDate = new Date(31,10,2023);
-        Date date = new Date(1,11,2023);
+        Date expectedPreviousDate = new Date(30,11,2023);
+        Date date = new Date(1,12,2023);
         Date previousDate = date.previousDate();
 
         assertEquals(expectedPreviousDate.day, previousDate.day);
@@ -123,9 +150,31 @@ class DateTest {
     }
 
     @Test
-    void previousDate() {
-        Date expectedPreviousDate = new Date(24,12,2023);
-        Date date = new Date(25,12,2023);
+    void previousDate_basic() {
+        Date expectedPreviousDate = new Date(24,11,2023);
+        Date date = new Date(25,11,2023);
+        Date previousDate = date.previousDate();
+
+        assertEquals(expectedPreviousDate.day, previousDate.day);
+        assertEquals(expectedPreviousDate.month, previousDate.month);
+        assertEquals(expectedPreviousDate.year, previousDate.year);
+    }
+
+    @Test
+    void previousDate_FebLeap(){
+        Date expectedPreviousDate = new Date(29,2,2024);
+        Date date = new Date(1,3,2024);
+        Date previousDate = date.previousDate();
+
+        assertEquals(expectedPreviousDate.day, previousDate.day);
+        assertEquals(expectedPreviousDate.month, previousDate.month);
+        assertEquals(expectedPreviousDate.year, previousDate.year);
+    }
+
+    @Test
+    void previousDate_FebCommon(){
+        Date expectedPreviousDate = new Date(28,2,2023);
+        Date date = new Date(1,3,2023);
         Date previousDate = date.previousDate();
 
         assertEquals(expectedPreviousDate.day, previousDate.day);
@@ -160,6 +209,22 @@ class DateTest {
     @Test
     void compareToDate_otherAfter() {
         Date date1 = new Date(13,12,2023);
+        Date date2 = new Date(15,12,2023);
+
+        assertEquals(-1, date1.compareTo(date2));
+    }
+
+    @Test
+    void compareToDate_otherAfterDiffMonth() {
+        Date date1 = new Date(13,11,2023);
+        Date date2 = new Date(15,12,2023);
+
+        assertEquals(-1, date1.compareTo(date2));
+    }
+
+    @Test
+    void compareToDate_otherAfterDiffYear() {
+        Date date1 = new Date(13,11,2022);
         Date date2 = new Date(15,12,2023);
 
         assertEquals(-1, date1.compareTo(date2));

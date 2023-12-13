@@ -5,7 +5,7 @@ class Date implements Comparable<Date> {
     int month;
     int year;
 
-    public Date(int day, int month, int year) {
+    public Date(int day, int month, int year) throws IllegalArgumentException{
         if (isValidDate(day, month, year)) {
             this.day = day;
             this.month = month;
