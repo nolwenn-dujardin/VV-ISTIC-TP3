@@ -53,3 +53,57 @@ Use the project in [tp3-date](../code/tp3-date) to complete this exercise.
 
 ## Answer
 
+### 1
+
+isValidDate
+
+| Characteristics |  |  |  |  |
+| --- | --- | --- | --- | --- |
+| Value of year | < 0 | 0 | valid leap year | valid non leap year |
+| Value of month | < 0 | 0 | ≥1 & ≤ 12 | > 12 |
+| Value of day | < 0 | 0 | ≥ 1 & ≤ max(month, year) | > max(month, year) |
+
+isLeapYear
+
+| Characteristics |  |  |  |  |
+| --- | --- | --- | --- | --- |
+| Value of year | valid leap year | valid non leap year | < 0  | 0 |
+
+nextDate
+
+| Characteristics |  |  |  |
+| --- | --- | --- | --- |
+| Value of date | last day of month | last day of year | not end of month or end of year |
+
+previousDate
+
+| Characteristics |  |  |  |
+| --- | --- | --- | --- |
+| Value of date | first day of year | first day of month | not start of year or start of month |
+
+compareToDate
+
+| Characteristics | Blocks |  |  |  |
+| --- | --- | --- | --- | --- |
+| Value of date | null other | same date | other date before | other date after |
+
+### 2
+
+On obtient un coverage de 88%
+
+Il manque :
+* Des tests de création de date avec des valeurs incorrectes
+* Des tests pour nextDate et previousDate avec février pour les années normales et bissextiles
+* Des tests sur comparaToDate avec des mois et années différentes
+
+Le coverage est à 100% après l'ajout de ces tests.
+
+### 3
+
+### 4
+
+En évaluant la suite de tests avec PIT, on obtient un score de mutation de 91%
+
+![Untitled](./img/img1.png)
+
+![Untitled](./img/img2.png)
