@@ -26,3 +26,14 @@ Use the project in [tp3-balanced-strings](../code/tp3-balanced-strings) to compl
 
 ## Answer
 
+1.
+- Chaîne de caractère vide
+- Chaîne de caractère égale à null
+- Chaîne de caractère égale à "[]"
+
+3.
+Il y a une ligne de code avec 2 conditions : if (stack.isEmpty() || !isMatchingPair(stack.pop(), ch))
+Nous avons rajouté un cas de test pour vérifier chaque condition.
+
+4. 
+Nous obtenons un score de 96% de Mutation Coverage.
